@@ -765,6 +765,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cookie@npm:^0.4.1":
+  version: 0.4.2
+  resolution: "cookie@npm:0.4.2"
+  checksum: a00833c998bedf8e787b4c342defe5fa419abd96b32f4464f718b91022586b8f1bafbddd499288e75c037642493c83083da426c6a9080d309e3bd90fd11baa9b
+  languageName: node
+  linkType: hard
+
 "crypto-random-string@npm:^2.0.0":
   version: 2.0.0
   resolution: "crypto-random-string@npm:2.0.0"
@@ -1171,6 +1178,7 @@ __metadata:
     "@types/react": 18.0.25
     "@types/react-dom": 18.0.9
     next: 13.0.4
+    next-session: ^4.0.5
     prettier: ^2.7.1
     prisma: ^4.6.1
     react: 18.2.0
@@ -1678,12 +1686,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.3.4":
+"nanoid@npm:^3.1.25, nanoid@npm:^3.3.4":
   version: 3.3.4
   resolution: "nanoid@npm:3.3.4"
   bin:
     nanoid: bin/nanoid.cjs
   checksum: 2fddd6dee994b7676f008d3ffa4ab16035a754f4bb586c61df5a22cf8c8c94017aadd360368f47d653829e0569a92b129979152ff97af23a558331e47e37cd9c
+  languageName: node
+  linkType: hard
+
+"next-session@npm:^4.0.5":
+  version: 4.0.5
+  resolution: "next-session@npm:4.0.5"
+  dependencies:
+    cookie: ^0.4.1
+    nanoid: ^3.1.25
+  checksum: fe34fca293ad029b8552e4ca67dcc807143030e5b28985bac0df32f872693595ba00493db4ebc2ea02e51bd4bec610989b5de06597ade7068687a67a8ea59e41
   languageName: node
   linkType: hard
 
