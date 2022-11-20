@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User models
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  twitter  TwitterPerson?
+  mastodon FediversePerson?
+}
+
+model TwitterPerson {
+  twitter_id   String   @id
+  spice        String
+  ids_followed String[]
+  ids_ignored  String[]
+  ids_pending  String[]
+
+  belongs_to    User   @relation(fields: [belongs_to_id], references: [id], onDelete: Cascade)
+  belongs_to_id String @unique
+}
+
+model FediversePerson {
+  mastodon_id   String   @id
+  spice         String
+  notifications String[]
+
+  nobot_consent Boolean @default(false)
+
+  belongs_to    User   @relation(fields: [belongs_to_id], references: [id], onDelete: Cascade)
+  belongs_to_id String @unique
+}
+
+// Sessions
+model UserSession {
+  /// session id!
+  biscuit  String  @id
+  /// authenticated used (uuid) id
+  authed   String?
+  /// this is the 'state' parameter - should not exist if the user has authed
+  bullshit String? @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  createdAt DateTime @default(now())
+}
