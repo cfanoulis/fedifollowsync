@@ -16,6 +16,7 @@ export default class PostresqlPrismaStore implements SessionStore {
 			where: { biscuit: sessionId },
 			select: { authed: true, bullshit: true, cookieData: true }
 		});
+
 		return { cookie: hydrateJSONCookie(session.cookieData), ...session } as SessionData;
 	}
 
@@ -28,13 +29,21 @@ export default class PostresqlPrismaStore implements SessionStore {
 			},
 			select: {}
 		});
+
+		return;
 	}
 
 	public async destroy(sessionId: string) {
 		await this.pg.userSession.delete({ where: { biscuit: sessionId }, select: {} });
+
+		return;
 	}
 
-	public async touch() {}
+	public async touch() {
+		//noop
+
+		return;
+	}
 }
 
 const hydrateJSONCookie = (data: string) =>
