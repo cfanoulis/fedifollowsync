@@ -1,5 +1,7 @@
 html,
 body {
+	--block-accent-color: #042069;
+	--block-shadow-color: #fafafa;
 	padding: 0;
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -19,3 +21,5 @@ main {
 	max-width: 800px;
 	color: #222;
 }
+
+/* https://thesephist.github.io/blocks.css/ */

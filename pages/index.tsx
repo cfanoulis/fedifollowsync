@@ -9,7 +9,9 @@ export default function Home() {
 					follow on Twitter got a Fediverse account. Once it detects someone made an account, it DMs your Fediverse user page & let's you
 					select who to follow!
 				</p>
-				<button className="accent block">Find your people</button>
+				<a className="accent block" style={{ padding: '0.45em' }} href="api/auth/twitter/init">
+					Find your people, by logging in with <i className="fa fa-twitter fa-fw" aria-hidden="true"></i> Twitter
+				</a>
 			</div>
 		</main>
 	);

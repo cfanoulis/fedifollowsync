@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import type { PrismaClient } from '@prisma/client';
 import type { Cookie } from 'lib/types/session';
 import type { SessionData, SessionStore } from 'next-session';
 import db from 'prisma/db';
