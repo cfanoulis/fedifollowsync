@@ -12,7 +12,7 @@ datasource db {
 
 // User models
 model User {
-  id        String   @id @default(uuid())
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt DateTime @default(now())
 
   twitter  TwitterPerson?
