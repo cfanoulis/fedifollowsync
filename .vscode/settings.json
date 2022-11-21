@@ -1,5 +1,6 @@
 {
 	"files.autoSave": "onFocusChange",
 	"typescript.preferences.importModuleSpecifierEnding": "minimal",
-	"typescript.preferences.importModuleSpecifier": "shortest"
+	"typescript.preferences.importModuleSpecifier": "shortest",
+	"typescript.tsdk": "node_modules\\typescript\\lib"
 }
