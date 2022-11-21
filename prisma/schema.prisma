@@ -40,17 +40,3 @@ model FediversePerson {
   belongs_to    User   @relation(fields: [belongs_to_id], references: [id], onDelete: Cascade)
   belongs_to_id String @unique
 }
-
-// Sessions
-model UserSession {
-  /// session id!
-  biscuit    String  @id
-  /// authenticated used (uuid) id
-  authed     String?
-  /// this is the 'state' parameter - should not exist if the user has authed
-  bullshit   String? @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  /// Cookie data (for some reason _I_ need to store this?)
-  cookieData String
-
-  createdAt DateTime @default(now())
-}
