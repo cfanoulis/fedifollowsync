@@ -47,3 +47,4 @@ next-env.d.ts
 
 # postgres ssl
 prisma/*.crt
+.vercel

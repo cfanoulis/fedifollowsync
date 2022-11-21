@@ -27,7 +27,7 @@ model TwitterPerson {
   ids_pending  String[]
 
   belongs_to    User   @relation(fields: [belongs_to_id], references: [id], onDelete: Cascade)
-  belongs_to_id String @unique
+  belongs_to_id String @unique @db.Uuid
 }
 
 model FediversePerson {
@@ -38,5 +38,5 @@ model FediversePerson {
   nobot_consent Boolean @default(false)
 
   belongs_to    User   @relation(fields: [belongs_to_id], references: [id], onDelete: Cascade)
-  belongs_to_id String @unique
+  belongs_to_id String @unique @db.Uuid
 }

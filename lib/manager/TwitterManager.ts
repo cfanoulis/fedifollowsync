@@ -22,20 +22,14 @@ export class TwitterManager {
 	}
 
 	public async exchangeCode(code: string, codeVerifier: string) {
-		const { accessToken, refreshToken, expiresIn } = await this.twitter.loginWithOAuth2({
+		return this.twitter.loginWithOAuth2({
 			code,
 			codeVerifier,
 			redirectUri: 'http://localhost:3000/api/auth/twitter/callback'
 		});
-
-		return {
-			accessToken,
-			refreshToken,
-			expiresIn
-		};
 	}
 
-	public static SCOPES = ['offline.access', 'users.read'];
+	public static SCOPES = ['offline.access', 'users.read', 'tweet.read', 'follows.read'];
 	public static HEADERS = {
 		'User-Agent': 'FediFollowSync/v0 - ffs@fanoulis.dev'
 		// Authentication: `Basic ${Buffer.from(`${process.env.TWT_ID}:${process.env.TWT_SECRET}`).toString('base64')}`

@@ -22,8 +22,13 @@ export function withSessionSsr<P extends Record<string, unknown> = Record<string
 
 declare module 'iron-session' {
 	interface IronSessionData {
-		state: string;
-		code_challenge: string;
-		uid: string;
+		state?: string;
+		code_challenge?: string;
+		uid?: string;
+		twtGreet?: {
+			verified: boolean;
+			username: string;
+			followingCount: number;
+		};
 	}
 }

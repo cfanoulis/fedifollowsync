@@ -1,4 +1,8 @@
-export default function Home() {
+import TwitterBlock from 'components/TwitterBlock';
+import { withSessionSsr } from 'lib/session';
+import type { InferGetServerSidePropsType } from 'next';
+
+export default function Home({ twitter }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	return (
 		<main className="container">
 			<h1 style={{ marginBottom: '4px' }}>FediFollowSync</h1>
@@ -9,41 +13,36 @@ export default function Home() {
 					follow on Twitter got a Fediverse account. Once it detects someone made an account, it DMs your Fediverse user page & let's you
 					select who to follow!
 				</p>
+			</div>
+			{twitter.show ? (
+				<TwitterBlock username={twitter.username} followingCount={twitter.followingCount} />
+			) : (
 				<a className="accent block" style={{ padding: '0.45em' }} href="api/auth/twitter/init">
 					Find your people, by logging in with <i className="fa fa-twitter fa-fw" aria-hidden="true"></i> Twitter
 				</a>
-			</div>
-			<div>
-				<div className="fixed block">
-					<h3>Welcome aboard, @user</h3>
-					<div className="block-copy">
-						Great, first step, done <i className="fa fa-check fa-fw block-copy"></i>. We see you follow numberOfFollowing people.
-						<br />
-						Now, login with your Mastodon server to finish the deal!
-						<form method="get" target="/api/auth/fediverse/init" className="flexbox">
-							<div className="wrapper fixed block">
-								<input
-									name="server"
-									autoComplete="mastodon-server"
-									required
-									inputMode="email"
-									placeholder="gagaren@mastodon.social"
-									style={{ padding: '0.35em' }}
-								/>
-							</div>
-							<button
-								className="accent block"
-								type="submit"
-								formAction="/api/auth/fediverse/init"
-								formMethod="get"
-								style={{ padding: '0.45em' }}
-							>
-								Login with <i className="fa fa-mastodon fa-fw" aria-hidden="true"></i> Mastodon
-							</button>
-						</form>
-					</div>
-				</div>
-			</div>
+			)}
 		</main>
 	);
 }
+
+export const getServerSideProps = withSessionSsr(async function ssr({ req }) {
+	if (!req.session.twtGreet || !req.session.twtGreet.username)
+		return {
+			props: {
+				twitter: {
+					show: false,
+					username: '',
+					followingCount: 0
+				}
+			}
+		};
+	return {
+		props: {
+			twitter: {
+				show: true,
+				username: req.session.twtGreet?.username,
+				followingCount: req.session.twtGreet?.followingCount
+			}
+		}
+	};
+});
