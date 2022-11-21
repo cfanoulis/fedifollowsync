@@ -13,6 +13,37 @@ export default function Home() {
 					Find your people, by logging in with <i className="fa fa-twitter fa-fw" aria-hidden="true"></i> Twitter
 				</a>
 			</div>
+			<div>
+				<div className="fixed block">
+					<h3>Welcome aboard, @user</h3>
+					<div className="block-copy">
+						Great, first step, done <i className="fa fa-check fa-fw block-copy"></i>. We see you follow numberOfFollowing people.
+						<br />
+						Now, login with your Mastodon server to finish the deal!
+						<form method="get" target="/api/auth/fediverse/init" className="flexbox">
+							<div className="wrapper fixed block">
+								<input
+									name="server"
+									autoComplete="mastodon-server"
+									required
+									inputMode="email"
+									placeholder="gagaren@mastodon.social"
+									style={{ padding: '0.35em' }}
+								/>
+							</div>
+							<button
+								className="accent block"
+								type="submit"
+								formAction="/api/auth/fediverse/init"
+								formMethod="get"
+								style={{ padding: '0.45em' }}
+							>
+								Login with <i className="fa fa-mastodon fa-fw" aria-hidden="true"></i> Mastodon
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
 		</main>
 	);
 }

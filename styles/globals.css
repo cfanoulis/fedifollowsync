@@ -1,6 +1,6 @@
 html,
 body {
-	--block-accent-color: #042069;
+	--block-accent-color: #1d9bf0;
 	--block-shadow-color: #fafafa;
 	padding: 0;
 	margin: 0;
@@ -22,4 +22,19 @@ main {
 	color: #222;
 }
 
+.block-copy {
+	font-weight: 400 !important;
+	--block-accent-color: #5741d1;
+	--block-shadow-color: #fafafa;
+}
+
+.flexbox {
+	display: flex;
+	align-items: center;
+}
 /* https://thesephist.github.io/blocks.css/ */
+
+input {
+	outline: none;
+	border: 0;
+}
