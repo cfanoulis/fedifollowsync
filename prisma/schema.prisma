@@ -39,4 +39,16 @@ model FediversePerson {
 
   belongs_to    User   @relation(fields: [belongs_to_id], references: [id], onDelete: Cascade)
   belongs_to_id String @unique @db.Uuid
+
+  instance     MastodonClient @relation(fields: [instance_url], references: [instance_url])
+  instance_url String
+}
+
+model MastodonClient {
+  instance_url String @id
+
+  client_id     String
+  client_secret String
+
+  users FediversePerson[]
 }
