@@ -10,8 +10,8 @@ export default function Home({ twitter }: InferGetServerSidePropsType<typeof get
 			<div>
 				<p>
 					Fedifollowsync serves as a bridge for those leaving Twitter. Setting it up once, it checks every 7 days if any of the people you
-					follow on Twitter got a Fediverse account. Once it detects someone made an account, it DMs your Fediverse user page & let's you
-					select who to follow!
+					follow on Twitter got a Fediverse account. Once it detects someone made an account, it DMs your Fediverse user page & let&apos;s
+					you select who to follow!
 				</p>
 			</div>
 			{twitter.show ? (
@@ -25,7 +25,7 @@ export default function Home({ twitter }: InferGetServerSidePropsType<typeof get
 	);
 }
 
-export const getServerSideProps = withSessionSsr(async function ssr({ req }) {
+export const getServerSideProps = withSessionSsr(function ssr({ req }) {
 	if (!req.session.twtGreet || !req.session.twtGreet.username)
 		return {
 			props: {

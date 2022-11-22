@@ -13,7 +13,7 @@ export class TwitterManager {
 		this.twitter = new TwitterApi({ clientId: process.env.TWT_ID!, clientSecret: process.env.TWT_SECRET! }).readOnly;
 	}
 
-	public async prepareUrlLogin() {
+	public prepareUrlLogin() {
 		const { url, codeVerifier, state } = this.twitter.generateOAuth2AuthLink('http://localhost:3000/api/auth/twitter/callback', {
 			scope: TwitterManager.SCOPES
 		});
