@@ -15,12 +15,15 @@ export default function Home({ show, tuname, tfollowing, tavatar, funame }: Infe
 				</p>
 			</div>
 			{show > 0 ? (
-				<TwitterBlock username={tuname!} followingCount={tfollowing!} userAvatarUrl={tavatar!} />
+				<a className="accent red block" style={{ padding: '0.45em', textAlign: 'center' }} href="api/auth/bye">
+					Log out
+				</a>
 			) : (
 				<a className="accent blue block" style={{ padding: '0.45em' }} href="api/auth/twitter/init">
 					Find your people, by logging in with <i className="fa fa-twitter fa-fw" aria-hidden="true"></i> Twitter
 				</a>
 			)}
+			{show > 0 && <TwitterBlock username={tuname!} followingCount={tfollowing!} userAvatarUrl={tavatar!} />}
 		</main>
 	);
 }

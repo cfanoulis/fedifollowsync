@@ -4,7 +4,12 @@ import { withSessionRoute } from 'lib/session';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default withSessionRoute(async function handler(req: NextApiRequest, res: NextApiResponse) {
-	if (!req.query.server || Array.isArray(req.query.server)) throw new Error('no destination provided! this aint a bus!');
+	if (!req.query.server || Array.isArray(req.query.server)) {
+		const q = new URLSearchParams({
+			error: 'no_homeserver'
+		});
+		return res.redirect(`/?error=no_server`);
+	}
 
 	const [, instance] = req.query.server.split('@'); // todo: regex
 
@@ -13,5 +18,5 @@ export default withSessionRoute(async function handler(req: NextApiRequest, res:
 	await req.session.save();
 
 	const mastodon = await new MastodonManager(instance).getClientCredentials();
-	res.redirect(mastodon.prepareUrlLogin());
+	return res.redirect(mastodon.prepareUrlLogin());
 });

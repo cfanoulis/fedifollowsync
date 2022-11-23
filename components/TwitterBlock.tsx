@@ -17,7 +17,7 @@ export default function TwitterBlock({ username, followingCount, userAvatarUrl }
 						<p>Great, we see you - and your {followingCount} followers! Now, login with Mastodon and get syncin&apos;</p>
 					</div>
 				</div>
-				<form className="">
+				<form>
 					<div className="wrapper fixed block" style={{ width: '100%' }}>
 						<input
 							name="server"
@@ -36,15 +36,6 @@ export default function TwitterBlock({ username, followingCount, userAvatarUrl }
 						style={{ padding: '0.45em', width: '100%' }}
 					>
 						Login with <i className="fa fa-mastodon fa-fw" aria-hidden="true"></i> Mastodon
-					</button>
-					<button
-						className="accent red block"
-						type="submit"
-						formAction="/api/auth/bye"
-						formMethod="get"
-						style={{ padding: '0.45em', width: '100%' }}
-					>
-						Log out
 					</button>
 				</form>
 			</div>
