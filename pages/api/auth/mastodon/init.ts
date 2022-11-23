@@ -13,5 +13,5 @@ export default withSessionRoute(async function handler(req: NextApiRequest, res:
 	await req.session.save();
 
 	const mastodon = await new MastodonManager(instance).getClientCredentials();
-	res.redirect(mastodon.generateAuthLink());
+	res.redirect(mastodon.prepareUrlLogin());
 });

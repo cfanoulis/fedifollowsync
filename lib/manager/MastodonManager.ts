@@ -21,28 +21,10 @@ export default class MastodonManager {
 	}
 
 	/**
-	 * Fetch credentials from db, or request new ones
-	 * @returns this
-	 */
-	public async getClientCredentials() {
-		const credentials = await db.mastodonClient.findUnique({
-			where: { instance_url: this.instance },
-			select: { client_id: true, client_secret: true }
-		});
-
-		if (credentials) {
-			this.#credentials = { clientId: credentials.client_id, clientSecret: credentials.client_secret };
-			return this;
-		}
-
-		return this.getNewInstanceCredentials();
-	}
-
-	/**
 	 * Generate an oauth authz link for a user
 	 * @returns oauth url
 	 */
-	public generateAuthLink() {
+	public prepareUrlLogin() {
 		if (!this.#credentials) throw new Error('no credentials!');
 
 		const params = new URLSearchParams({
@@ -67,6 +49,24 @@ export default class MastodonManager {
 				code
 			})
 		});
+	}
+
+	/**
+	 * Fetch credentials from db, or request new ones
+	 * @returns this
+	 */
+	public async getClientCredentials() {
+		const credentials = await db.mastodonClient.findUnique({
+			where: { instance_url: this.instance },
+			select: { client_id: true, client_secret: true }
+		});
+
+		if (credentials) {
+			this.#credentials = { clientId: credentials.client_id, clientSecret: credentials.client_secret };
+			return this;
+		}
+
+		return this.getNewInstanceCredentials();
 	}
 
 	protected async getNewInstanceCredentials() {
