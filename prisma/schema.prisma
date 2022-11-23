@@ -28,6 +28,8 @@ model TwitterPerson {
 
   belongs_to    User   @relation(fields: [belongs_to_id], references: [id], onDelete: Cascade)
   belongs_to_id String @unique @db.Uuid
+
+  createdAt DateTime @default(now())
 }
 
 model FediversePerson {
@@ -42,6 +44,8 @@ model FediversePerson {
 
   instance     MastodonClient @relation(fields: [instance_url], references: [instance_url])
   instance_url String
+
+  createdAt DateTime @default(now())
 }
 
 model MastodonClient {
@@ -51,4 +55,6 @@ model MastodonClient {
   client_secret String
 
   users FediversePerson[]
+
+  createdAt DateTime @default(now())
 }
