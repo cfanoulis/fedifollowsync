@@ -25,7 +25,7 @@ declare module 'iron-session' {
 		state?: string;
 		code_challenge?: string;
 		uid?: string;
-		twtGreet?: {
+		twitter?: {
 			verified: boolean;
 			username: string;
 			followingCount: number;

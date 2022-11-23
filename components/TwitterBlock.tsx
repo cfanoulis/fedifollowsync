@@ -15,7 +15,7 @@ export default function TwitterBlock({ username, followingCount }: TwitterBlockP
 					{followingCount > 1000 ? " (damn, that's a lot) " : ' '}people.
 					<br />
 					Now, login with your Mastodon server to finish the deal!
-					<form method="get" target="/api/auth/fediverse/init" className="flexbox">
+					<form className="flexbox">
 						<div className="wrapper fixed block">
 							<input
 								name="server"
@@ -29,7 +29,7 @@ export default function TwitterBlock({ username, followingCount }: TwitterBlockP
 						<button
 							className="accent block"
 							type="submit"
-							formAction="/api/auth/fediverse/init"
+							formAction="/api/auth/mastodon/init"
 							formMethod="get"
 							style={{ padding: '0.45em' }}
 						>

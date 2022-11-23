@@ -26,7 +26,7 @@ export default function Home({ twitter }: InferGetServerSidePropsType<typeof get
 }
 
 export const getServerSideProps = withSessionSsr(function ssr({ req }) {
-	if (!req.session.twtGreet || !req.session.twtGreet.username)
+	if (!req.session.twitter || !req.session.twitter.username)
 		return {
 			props: {
 				twitter: {
@@ -40,8 +40,8 @@ export const getServerSideProps = withSessionSsr(function ssr({ req }) {
 		props: {
 			twitter: {
 				show: true,
-				username: req.session.twtGreet?.username,
-				followingCount: req.session.twtGreet?.followingCount
+				username: req.session.twitter?.username,
+				followingCount: req.session.twitter?.followingCount
 			}
 		}
 	};

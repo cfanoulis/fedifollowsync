@@ -49,7 +49,7 @@ export default withSessionRoute(async function handler(req: NextApiRequest, res:
 				});
 
 	req.session.uid = user.id;
-	req.session.twtGreet = {
+	req.session.twitter = {
 		verified: twtUser.data.verified ?? false,
 		username: twtUser.data.username,
 		followingCount: (twtUser.data.public_metrics ?? { following_count: 69420 }).following_count ?? 69420
