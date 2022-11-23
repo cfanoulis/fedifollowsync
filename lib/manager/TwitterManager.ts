@@ -1,6 +1,6 @@
 import { TwitterApi, TwitterApiReadOnly } from 'twitter-api-v2';
 export class TwitterManager {
-	private twitter: TwitterApiReadOnly;
+	#twitter: TwitterApiReadOnly;
 
 	public constructor() {
 		// this.twitter = new auth.OAuth2User({
@@ -10,11 +10,11 @@ export class TwitterManager {
 		// 	scopes: ['users.read', 'offline.access']
 		// });
 
-		this.twitter = new TwitterApi({ clientId: process.env.TWT_ID!, clientSecret: process.env.TWT_SECRET! }).readOnly;
+		this.#twitter = new TwitterApi({ clientId: process.env.TWT_ID!, clientSecret: process.env.TWT_SECRET! }).readOnly;
 	}
 
 	public prepareUrlLogin() {
-		const { url, codeVerifier, state } = this.twitter.generateOAuth2AuthLink('http://localhost:3000/api/auth/twitter/callback', {
+		const { url, codeVerifier, state } = this.#twitter.generateOAuth2AuthLink('http://localhost:3000/api/auth/twitter/callback', {
 			scope: TwitterManager.SCOPES
 		});
 
@@ -22,7 +22,7 @@ export class TwitterManager {
 	}
 
 	public async exchangeCode(code: string, codeVerifier: string) {
-		return this.twitter.loginWithOAuth2({
+		return this.#twitter.loginWithOAuth2({
 			code,
 			codeVerifier,
 			redirectUri: 'http://localhost:3000/api/auth/twitter/callback'
@@ -30,10 +30,6 @@ export class TwitterManager {
 	}
 
 	public static SCOPES = ['offline.access', 'users.read', 'tweet.read', 'follows.read'];
-	public static HEADERS = {
-		'User-Agent': 'FediFollowSync/v0 - ffs@fanoulis.dev'
-		// Authentication: `Basic ${Buffer.from(`${process.env.TWT_ID}:${process.env.TWT_SECRET}`).toString('base64')}`
-	};
 }
 
 const twt = new TwitterManager();
