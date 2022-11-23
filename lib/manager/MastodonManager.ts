@@ -1,5 +1,5 @@
 import env from 'lib/env';
-import type { MastodonAccount, MastodonApiError, OauthApplication } from 'lib/types/Mastodon';
+import type { MastodonAccount, MastodonApiError, OauthApplication, OauthResponse } from 'lib/types/Mastodon';
 import { post } from 'lib/util';
 import db from 'prisma/db';
 
@@ -41,7 +41,7 @@ export default class MastodonManager {
 	public exchangeCode(code: string) {
 		if (!this.#credentials) throw new Error('no credentials!');
 
-		return post(`${this.baseOauthUrl}/token`, {
+		return post<OauthResponse & MastodonApiError>(`${this.baseOauthUrl}/token`, {
 			body: new URLSearchParams({
 				client_id: this.#credentials.clientId,
 				client_secret: this.#credentials.clientSecret,
