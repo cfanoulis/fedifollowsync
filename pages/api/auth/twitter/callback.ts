@@ -19,8 +19,8 @@ export default withSessionRoute(async function handler(req: NextApiRequest, res:
 
 	const twtUser = await twtResponse.client.v2.me({ 'user.fields': ['public_metrics'] });
 
-	const twitterPersonExists = (await db.twitterPerson.count({ where: { twitter_id: twtUser.data.id } })) === 0;
-	const user = twitterPersonExists
+	const newTwitterPerson = (await db.twitterPerson.count({ where: { twitter_id: twtUser.data.id } })) === 0;
+	const user = newTwitterPerson
 		? await db.user.create({
 				data: {
 					twitter: {
