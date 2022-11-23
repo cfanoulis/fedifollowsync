@@ -64,6 +64,60 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hapi/b64@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@hapi/b64@npm:6.0.0"
+  dependencies:
+    "@hapi/hoek": ^10.0.0
+  checksum: 7d19487de48a021f68affacfd5726fd3087767c920485aacb78d9c4583add50d411b0dbbcff206232cf7b4e173cdb4fd6dfa98e952f166d6f19d95dda62899c5
+  languageName: node
+  linkType: hard
+
+"@hapi/boom@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "@hapi/boom@npm:10.0.0"
+  dependencies:
+    "@hapi/hoek": 10.x.x
+  checksum: ea2b234fa1c76667b73a541f51e83251233a6f1db2a3f6ade9beb5174ce0ed2b55eea4d8a2a9fd0329bba31e1969c41bdb3af9218bef3abac58a30ea28e3d43e
+  languageName: node
+  linkType: hard
+
+"@hapi/bourne@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@hapi/bourne@npm:3.0.0"
+  checksum: 7174cab6c33191918fcdb1953fe3169a1106e6ac79a67ef5fd08b351f0813f8f608170f2239786cbe5519e03cdfe5ab748ea1635caa06dcd5802410295514ef8
+  languageName: node
+  linkType: hard
+
+"@hapi/cryptiles@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@hapi/cryptiles@npm:6.0.0"
+  dependencies:
+    "@hapi/boom": ^10.0.0
+  checksum: d55a0799361e63df85d31e1a00c66811e07235ebb4d69ec6505422b14dbe40096deec6f9e7bc9daaf01645d3756eacd70bfa21d244fbab05189381651a069a14
+  languageName: node
+  linkType: hard
+
+"@hapi/hoek@npm:10.x.x, @hapi/hoek@npm:^10.0.0":
+  version: 10.0.1
+  resolution: "@hapi/hoek@npm:10.0.1"
+  checksum: 6dbcd7ae138fc751b2d81169516668bc6e4b878bb2bfdfab5eb3d51fdfd361544cc791ff12375587bf71dbeb801810cd62105f5d744dfa457140fb1709bbea6f
+  languageName: node
+  linkType: hard
+
+"@hapi/iron@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "@hapi/iron@npm:7.0.0"
+  dependencies:
+    "@hapi/b64": ^6.0.0
+    "@hapi/boom": ^10.0.0
+    "@hapi/bourne": ^3.0.0
+    "@hapi/cryptiles": ^6.0.0
+    "@hapi/hoek": ^10.0.0
+  checksum: 563008bb68f1cdd104115a4f61c715a4d4d3652bdd639626517917b826a4eeef8b3ef6ce381baa17eb075a7fe35c1b07824899db20a65ec9676e7d945a6863ac
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.6":
   version: 0.11.7
   resolution: "@humanwhocodes/config-array@npm:0.11.7"
@@ -2259,6 +2313,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ffsync@workspace:."
   dependencies:
+    "@hapi/iron": ^7.0.0
     "@prisma/client": ^4.6.1
     "@sapphire/eslint-config": ^4.3.8
     "@sapphire/prettier-config": ^1.4.4
