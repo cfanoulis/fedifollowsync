@@ -30,5 +30,9 @@ declare module 'iron-session' {
 			username: string;
 			followingCount: number;
 		};
+		mastodon?: {
+			instance: string;
+			username?: string;
+		};
 	}
 }
