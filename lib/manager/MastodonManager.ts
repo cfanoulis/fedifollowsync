@@ -1,4 +1,5 @@
 import env from 'lib/env';
+import type { MastodonAccount, MastodonApiError, OauthApplication } from 'lib/types/Mastodon';
 import { post } from 'lib/util';
 import db from 'prisma/db';
 
@@ -49,6 +50,15 @@ export default class MastodonManager {
 				code
 			})
 		});
+	}
+
+	public async getAuthorizedUser(token: string) {
+		return fetch(`${this.baseApiUrl}/accounts/verify_credentials`, {
+			headers: {
+				'User-Agent': `fedifollowsync/v${env.GIT_COMMIT}`,
+				Authentication: `Bearer ${token}`
+			}
+		}).then((r) => r.json() as Promise<Partial<MastodonAccount> & MastodonApiError>);
 	}
 
 	/**
