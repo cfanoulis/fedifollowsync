@@ -1,6 +1,5 @@
 html,
 body {
-	--block-accent-color: #1d9bf0;
 	--block-shadow-color: #fafafa;
 	padding: 0;
 	margin: 0;
@@ -23,9 +22,21 @@ main {
 }
 
 .block-copy {
+	padding: 0.5rem;
 	font-weight: 400 !important;
-	--block-accent-color: #5741d1;
+	justify-content: space-around;
 	--block-shadow-color: #fafafa;
+}
+.purple {
+	--block-accent-color: #5741d1;
+}
+
+.red {
+	--block-accent-color: #d62913;
+}
+
+.blue {
+	--block-accent-color: #1d9bf0;
 }
 
 .flexbox {

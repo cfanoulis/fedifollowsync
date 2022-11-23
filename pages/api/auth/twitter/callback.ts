@@ -17,7 +17,7 @@ export default withSessionRoute(async function handler(req: NextApiRequest, res:
 
 	const twtResponse = await twt.exchangeCode(code, req.session.code_challenge);
 
-	const twtUser = await twtResponse.client.v2.me({ 'user.fields': ['public_metrics'] });
+	const twtUser = await twtResponse.client.v2.me({ 'user.fields': ['public_metrics', 'profile_image_url'] });
 
 	const newTwitterPerson = (await db.twitterPerson.count({ where: { twitter_id: twtUser.data.id } })) === 0;
 	const user = newTwitterPerson
@@ -50,7 +50,7 @@ export default withSessionRoute(async function handler(req: NextApiRequest, res:
 
 	req.session.uid = user.id;
 	req.session.twitter = {
-		verified: twtUser.data.verified ?? false,
+		avatarUrl: (twtUser.data.profile_image_url ?? '/twtr.svg').replace('_normal', ''),
 		username: twtUser.data.username,
 		followingCount: (twtUser.data.public_metrics ?? { following_count: 69420 }).following_count ?? 69420
 	};

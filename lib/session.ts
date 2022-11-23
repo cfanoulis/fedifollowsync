@@ -26,12 +26,12 @@ declare module 'iron-session' {
 		code_challenge?: string;
 		uid?: string;
 		twitter?: {
-			verified: boolean;
+			avatarUrl: string;
 			username: string;
 			followingCount: number;
 		};
 		mastodon?: {
-			instance: string;
+			instance?: string;
 			username?: string;
 		};
 	}

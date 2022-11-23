@@ -2,7 +2,7 @@ import TwitterBlock from 'components/TwitterBlock';
 import { withSessionSsr } from 'lib/session';
 import type { InferGetServerSidePropsType } from 'next';
 
-export default function Home({ twitter }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home({ show, tuname, tfollowing, tavatar, funame }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	return (
 		<main className="container">
 			<h1 style={{ marginBottom: '4px' }}>FediFollowSync</h1>
@@ -14,10 +14,10 @@ export default function Home({ twitter }: InferGetServerSidePropsType<typeof get
 					you select who to follow!
 				</p>
 			</div>
-			{twitter.show ? (
-				<TwitterBlock username={twitter.username} followingCount={twitter.followingCount} />
+			{show > 0 ? (
+				<TwitterBlock username={tuname!} followingCount={tfollowing!} userAvatarUrl={tavatar!} />
 			) : (
-				<a className="accent block" style={{ padding: '0.45em' }} href="api/auth/twitter/init">
+				<a className="accent blue block" style={{ padding: '0.45em' }} href="api/auth/twitter/init">
 					Find your people, by logging in with <i className="fa fa-twitter fa-fw" aria-hidden="true"></i> Twitter
 				</a>
 			)}
@@ -26,23 +26,15 @@ export default function Home({ twitter }: InferGetServerSidePropsType<typeof get
 }
 
 export const getServerSideProps = withSessionSsr(function ssr({ req }) {
-	if (!req.session.twitter || !req.session.twitter.username)
-		return {
-			props: {
-				twitter: {
-					show: false,
-					username: '',
-					followingCount: 0
-				}
-			}
-		};
+	if (!req.session.uid) return { props: { show: 0, tuname: '', tfollowing: 0, tavatar: '', funame: '' } };
+	const show = req.session.twitter ? (req.session.mastodon ? 2 : 1) : 0; // 2: mastodon complete, 1: twitter complete, masto pending, 0: nul state
 	return {
 		props: {
-			twitter: {
-				show: true,
-				username: req.session.twitter?.username,
-				followingCount: req.session.twitter?.followingCount
-			}
+			show,
+			tuname: req.session.twitter?.username ?? '',
+			tfollowing: req.session.twitter?.followingCount ?? -1,
+			tavatar: req.session.twitter?.avatarUrl ?? '',
+			funame: req.session.mastodon?.username ?? ''
 		}
 	};
 });

@@ -1,45 +1,52 @@
-import Link from 'next/link';
+import Image from 'next/image';
 
 interface TwitterBlockProps {
 	username: string;
 	followingCount: number;
+	userAvatarUrl: string;
 }
 
-export default function TwitterBlock({ username, followingCount }: TwitterBlockProps) {
+export default function TwitterBlock({ username, followingCount, userAvatarUrl }: TwitterBlockProps) {
 	return (
 		<>
-			<div className="fixed block">
-				<h3>Welcome aboard, @{username}</h3>
-				<div className="block-copy">
-					Great, first step, done <i className="fa fa-check fa-fw block-copy"></i>. We see you follow {followingCount}
-					{followingCount > 1000 ? " (damn, that's a lot) " : ' '}people.
-					<br />
-					Now, login with your Mastodon server to finish the deal!
-					<form className="flexbox">
-						<div className="wrapper fixed block">
-							<input
-								name="server"
-								autoComplete="mastodon-server"
-								required
-								inputMode="email"
-								placeholder="gagaren@mastodon.social"
-								style={{ padding: '0.35em' }}
-							/>
-						</div>
-						<button
-							className="accent block"
-							type="submit"
-							formAction="/api/auth/mastodon/init"
-							formMethod="get"
-							style={{ padding: '0.45em' }}
-						>
-							Login with <i className="fa fa-mastodon fa-fw" aria-hidden="true"></i> Mastodon
-						</button>
-					</form>
-					<sub>
-						Or, just <Link href="/api/auth/bye">get out really quickly</Link>
-					</sub>
+			<div className="fixed block flexbox twitter block-copy">
+				<div style={{ width: '50%', display: 'flex' }}>
+					<Image src={userAvatarUrl} width="72" height="72" alt="twitter profile" style={{ float: 'left', marginRight: '12px' }}></Image>
+					<div>
+						<h3 style={{ marginTop: '0px' }}>Welcome aboard, @{username}</h3>
+						<p>Great, we see you - and your {followingCount} followers! Now, login with Mastodon and get syncin&apos;</p>
+					</div>
 				</div>
+				<form className="">
+					<div className="wrapper fixed block" style={{ width: '100%' }}>
+						<input
+							name="server"
+							autoComplete="mastodon-server"
+							inputMode="email"
+							placeholder="char@infosec.exchange"
+							style={{ padding: '0.35em', width: '100%' }}
+						/>
+						{/* //TODO: auto detect username in displayname/bio? */}
+					</div>
+					<button
+						className="accent purple block"
+						type="submit"
+						formAction="/api/auth/mastodon/init"
+						formMethod="get"
+						style={{ padding: '0.45em', width: '100%' }}
+					>
+						Login with <i className="fa fa-mastodon fa-fw" aria-hidden="true"></i> Mastodon
+					</button>
+					<button
+						className="accent red block"
+						type="submit"
+						formAction="/api/auth/bye"
+						formMethod="get"
+						style={{ padding: '0.45em', width: '100%' }}
+					>
+						Log out
+					</button>
+				</form>
 			</div>
 		</>
 	);
